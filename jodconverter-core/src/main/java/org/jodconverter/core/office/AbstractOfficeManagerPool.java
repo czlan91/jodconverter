@@ -152,6 +152,18 @@ public abstract class AbstractOfficeManagerPool<E extends AbstractOfficeManagerP
     }
   }
 
+  public File getTempDir() throws OfficeException {
+      if (tempDir.exists()) {
+          return tempDir;
+      }
+
+      tempDir.mkdirs();
+      if (!tempDir.isDirectory()) {
+          throw new OfficeException(String.format("Cannot create temporary directory: %s", tempDir));
+      }
+      return null;
+  }
+
   @Override
   public final boolean isRunning() {
 
